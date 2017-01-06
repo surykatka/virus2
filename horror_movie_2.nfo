@@ -4,6 +4,7 @@ Znowu jesteś scenarzystą horroru. I znowu musisz stworzyć program, który
 symuluje potencjalną fabułę i dostarczy Ci pomysłów do Twojego arcydzieła.
 Jednak tym razem masz użyć innych technologii do realizacji swojego programu.
 
+
 Akcja dzieje się w małym miasteczku w stanie Maine. Miasteczko zostaje
 nawiedzone przez tajemniczą bestię. Ponieważ nie masz koncepcji na konkretnych
 bohaterów i potwora będącego głównym zagrożeniem, musisz przygotować
@@ -15,12 +16,12 @@ implementację oraz umożliwią łatwą rozbudowę programu.
 = Plik citizen.h oraz citizen.cc =
 
 Klasy 
------- Adult, 
------- Teenager, 
------- Sheriff, w których używane są typy pomocnicze:
------- HealthPoints będący typem przechowującym punkty życia,
------- Age będący typem reprezentującym wiek,
------- AttackPower reprezentujący w przypadku szeryfa siłę ataku.
+++++++ Adult, 
+++++++ Teenager, 
+++++++ Sheriff, w których używane są typy pomocnicze:
+++++++ HealthPoints będący typem przechowującym punkty życia,
+++++++ Age będący typem reprezentującym wiek,
+++++++ AttackPower reprezentujący w przypadku szeryfa siłę ataku.
 
 Klasy Adult, Teenager przyjmują w konstruktorze HealthPoints health oraz
 Age age, a Sheriff dodatkowo AttackPower attackPower. Klasy Adult i Sheriff
@@ -28,27 +29,27 @@ Age age, a Sheriff dodatkowo AttackPower attackPower. Klasy Adult i Sheriff
 ?????? te wartości walidowane w konstruktorze? co zrobić, jak poza zakresem?
 
 Klasy Adult, Teenager, Sheriff udostępniają metody publiczne:
-------* HealthPoints getHealth() – zwraca liczbę punktów życia mieszkańca,
-------* Age getAge() – zwraca wiek mieszkańca,
-------* void takeDamage(AttackPower damage) – zmniejsza liczbę punktów życia
+++++++ HealthPoints getHealth() – zwraca liczbę punktów życia mieszkańca,
+++++++ Age getAge() – zwraca wiek mieszkańca,
+++++++ void takeDamage(AttackPower damage) – zmniejsza liczbę punktów życia
   mieszkańca o damage, ale nie więcej niż mieszkaniec ma aktualnie.
 
 Klasa Sheriff ma dodatkowo metodę publiczną:
-------* AttackPower getAttackPower() – zwraca siłę ataku szeryfa.
+++++++ AttackPower getAttackPower() – zwraca siłę ataku szeryfa.
 
-------Klasy Adult, Teenager, Sheriff powinny być podklasami ogólniejszego typu
+++++++ Klasy Adult, Teenager, Sheriff powinny być podklasami ogólniejszego typu
 Citizen.
 
-Dodatkowo powinny istnieć funkcje fabrykujące dla Adult, Teenager, Sheriff
+------ Dodatkowo powinny istnieć funkcje fabrykujące dla Adult, Teenager, Sheriff
 z sygnaturami pasującymi do przykładu.
 ?????? co to są funkcje fabrykujące? :D
 
 = Plik monster.h oraz monster.cc =
 
 Klasy 
-------Zombie, 
-------Vampire, 
-------Mummy, w których używane są typy pomocnicze:
+++++++Zombie, 
+++++++Vampire, 
+++++++Mummy, w których używane są typy pomocnicze:
 * HealthPoints będący typem przechowującym punkty życia,
 * AttackPower reprezentujący siłę ataku.
 
@@ -56,15 +57,15 @@ Klasy Zombie, Vampire i Mummy przyjmują w konstruktorze HealthPoints health
 oraz AttackPower attackPower.
 
 Klasy Vampire, Zombie i Mummy mają metody publiczne:
-------Health getHealth() – zwraca liczbę punktów życia potwora,
-------AttackPower getAttackPower() – zwraca siłę ataku potwora,
-------void takeDamage(AttackPower damage) – zmniejsza liczbę punktów życia potwora
+++++++Health getHealth() – zwraca liczbę punktów życia potwora,
+++++++AttackPower getAttackPower() – zwraca siłę ataku potwora,
+++++++void takeDamage(AttackPower damage) – zmniejsza liczbę punktów życia potwora
 o damage, ale nie więcej niż potwór ma aktualnie.
 
-------Klasy Zombie, Vampire i Mummy powinny być podklasami ogólniejszego typu Monster.
+++++++Klasy Zombie, Vampire i Mummy powinny być podklasami ogólniejszego typu Monster.
 
 W sequelu potwory mogą również atakować grupowo. Należy 
-------zaimplementować odpowiednią klasę do ataku grupowego GroupOfMonsters, która w konstruktorze
+++++++zaimplementować odpowiednią klasę do ataku grupowego GroupOfMonsters, która w konstruktorze
 przyjmuje wektor (std::vector) albo listę inicjującą (std::initializer_list)
 zawierającą potwory, które są w grupie. GroupOfMonsters mają metody publiczne:
 ------Health getHealth() – zwraca liczbę punktów życia grupy (suma punktów życia

@@ -11,6 +11,10 @@ class AttackPower {
 		AttackPower(int _attackPower) {
 			this->attackPower = _attackPower;
 		}
+		
+		int getPoints() {
+			return this->attackPower;
+		}
 };
 
 class HealthPoints {
@@ -23,7 +27,7 @@ public:
 		this->healthPoints = healthPoints;
 	}
 	// nie będę się upierać przy poniższej implementacji :p
-	int takePoints(HealthPoints loss) {
+	int takePoints(AttackPower loss) {
 		if (this->healthPoints > 0) {
 			this->healthPoints = this->healthPoints - loss.getPoints() < 1 
 				? 0 : this->healthPoints - loss.getPoints();
@@ -68,7 +72,7 @@ public:
         return age;
     }
     
-    void takeDamage(HealthPoints damage) {
+    void takeDamage(AttackPower damage) {
 		this->health.takePoints(damage);
 	}
 };
