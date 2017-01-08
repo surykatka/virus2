@@ -40,9 +40,8 @@ Klasa Sheriff ma dodatkowo metodę publiczną:
 ++++++ Klasy Adult, Teenager, Sheriff powinny być podklasami ogólniejszego typu
 Citizen.
 
------- Dodatkowo powinny istnieć funkcje fabrykujące dla Adult, Teenager, Sheriff
+++++++Dodatkowo powinny istnieć funkcje fabrykujące dla Adult, Teenager, Sheriff
 z sygnaturami pasującymi do przykładu.
-?????? co to są funkcje fabrykujące? :D
 
 = Plik monster.h oraz monster.cc =
 
@@ -68,14 +67,14 @@ W sequelu potwory mogą również atakować grupowo. Należy
 ++++++zaimplementować odpowiednią klasę do ataku grupowego GroupOfMonsters, która w konstruktorze
 przyjmuje wektor (std::vector) albo listę inicjującą (std::initializer_list)
 zawierającą potwory, które są w grupie. GroupOfMonsters mają metody publiczne:
-------Health getHealth() – zwraca liczbę punktów życia grupy (suma punktów życia
+++++++Health getHealth() – zwraca liczbę punktów życia grupy (suma punktów życia
 żywych potworów),
-------AttackPower getAttackPower() – zwraca siłę ataku grupy (suma sił ataku żywych
+++++++AttackPower getAttackPower() – zwraca siłę ataku grupy (suma sił ataku żywych
 potworów),
-------void takeDamage(AttackPower damage) – zmniejsza liczbę punktów życia każdego
+++++++void takeDamage(AttackPower damage) – zmniejsza liczbę punktów życia każdego
 potwora w grupie o damage, ale nie więcej niż potwór ma aktualnie.
 
-?????? Dodatkowo powinny istnieć funkcje fabrykujące dla Zombie, Vampire, Mummy,
+++++++Dodatkowo powinny istnieć funkcje fabrykujące dla Zombie, Vampire, Mummy,
 GroupOfMonsters z sygnaturami pasującymi do przykładu.
 
 = Plik smalltown.h oraz smalltown.cc =

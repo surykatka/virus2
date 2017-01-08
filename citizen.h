@@ -1,6 +1,8 @@
 #ifndef CITIZEN_H
 #define CITIZEN_H
 
+#include <cassert>
+
 class AttackPower {
 	private: 
 		int attackPower;
@@ -100,5 +102,17 @@ public:
         return attackPower;
     }
 };
+
+Sheriff createSheriff(int health, int age, int attack) {
+	return Sheriff(health, age, attack);
+}
+
+Teenager createTeenager(int health, int age) {
+	return Teenager(health, age);
+}
+
+Adult createAdult(int health, int age) {
+	return Adult(health, age);
+}
 
 #endif //CITIZEN_H
