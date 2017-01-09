@@ -30,7 +30,7 @@ class Zombie : public Monster {
 public:
 	Zombie(int health, int age) : Monster(health, age) {
     }
-    
+
     std::string getName() {
 		return "Zombie";
 	}
@@ -40,7 +40,7 @@ class Mummy : public Monster {
 public:
 	Mummy(int health, int age) : Monster(health, age) {
     }
-    
+
     std::string getName() {
 		return "Mummy";
 	}
@@ -50,7 +50,7 @@ class Vampire : public Monster {
 public:
 	Vampire(int health, int age) : Monster(health, age) {
     }
-    
+
     std::string getName() {
 		return "Vampire";
 	}
@@ -66,14 +66,14 @@ class GroupOfMonsters {
 		this->monster_list = _monster_list;
 		int temp_attack = 0;
 		int temp_health = 0;
-		for (int i = 0; i < monster_list.size(); i++) {
+		for (size_t i = 0; i < monster_list.size(); i++) {
 			temp_attack += monster_list[i].getAttackPower().getPoints();
 			temp_health += monster_list[i].getHealth().getPoints();
 		}
 		this->_attack_power = AttackPower(temp_attack);
 		this->_health = HealthPoints(temp_health);
 	}
-	
+
 	 HealthPoints getHealth() const {
         return _health;
     }
@@ -83,7 +83,7 @@ class GroupOfMonsters {
     }
 
     void takeDamage(AttackPower damage) {
-        for (int i = 0; i < monster_list.size(); i++) {
+        for (size_t i = 0; i < monster_list.size(); i++) {
 			monster_list[i].takeDamage(damage);
 			// nie upieram sie przy ponizszej implementacji
 			if (monster_list[i].getHealth().getPoints() == 0) {
@@ -96,7 +96,7 @@ class GroupOfMonsters {
 			}
 		}
     }
-    
+
      std::string getName() {
 		return "GroupOfMonsters";
 	}

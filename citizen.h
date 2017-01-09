@@ -4,7 +4,7 @@
 #include <cassert>
 
 class AttackPower {
-	private: 
+	private:
 		int attackPower;
 	public:
 		AttackPower() {
@@ -13,7 +13,7 @@ class AttackPower {
 		AttackPower(int _attackPower) {
 			this->attackPower = _attackPower;
 		}
-		
+
 		int getPoints() {
 			return this->attackPower;
 		}
@@ -31,9 +31,9 @@ public:
 	// nie będę się upierać przy poniższej implementacji :p
 	int takePoints(AttackPower loss) {
 		if (this->healthPoints > 0) {
-			this->healthPoints = this->healthPoints - loss.getPoints() < 1 
+			this->healthPoints = this->healthPoints - loss.getPoints() < 1
 				? 0 : this->healthPoints - loss.getPoints();
-		} 
+		}
 		return this->healthPoints;
 	}
 	int getPoints() {
@@ -61,10 +61,10 @@ private:
 	Age age;
 	HealthPoints health;
 public:
-	Citizen(int _health, int _age) {
+	Citizen(HealthPoints _health, Age _age) {
         //TODO tu asercja o wiek?
-        this->age = Age(_age);
-        this->health = HealthPoints(_health);
+        this->age = _age;
+        this->health = _health;
     }
     HealthPoints getHealth() const {
         return health;
@@ -73,7 +73,7 @@ public:
     Age getAge() const {
         return age;
     }
-    
+
     void takeDamage(AttackPower damage) {
 		this->health.takePoints(damage);
 	}
@@ -81,13 +81,13 @@ public:
 
 class Adult : public Citizen {
 public:
-	Adult(int health, int age) : Citizen(health, age) {
+	Adult(HealthPoints health, Age age) : Citizen(health, age) {
     }
 };
 
 class Teenager : public Citizen {
 public:
-	Teenager(int health, int age) : Citizen(health, age) {
+	Teenager(HealthPoints health, Age age) : Citizen(health, age) {
     }
 };
 
@@ -95,8 +95,8 @@ class Sheriff : public Citizen {
 private:
 	AttackPower attackPower;
 public:
-	Sheriff(int health, int age, int _attackPower) : Citizen(health, age) {
-		this->attackPower = AttackPower(_attackPower);
+	Sheriff(HealthPoints health, Age age, AttackPower _attackPower) : Citizen(health, age) {
+		this->attackPower = _attackPower;
     }
 	AttackPower getAttackPower() const {
         return attackPower;
@@ -104,15 +104,15 @@ public:
 };
 
 Sheriff createSheriff(int health, int age, int attack) {
-	return Sheriff(health, age, attack);
+	return Sheriff(HealthPoints(health), Age(age), AttackPower(attack));
 }
 
 Teenager createTeenager(int health, int age) {
-	return Teenager(health, age);
+	return Teenager(HealthPoints(health), Age(age));
 }
 
 Adult createAdult(int health, int age) {
-	return Adult(health, age);
+	return Adult(HealthPoints(health), Age(age));
 }
 
 #endif //CITIZEN_H
