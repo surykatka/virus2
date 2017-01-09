@@ -54,6 +54,9 @@ public:
 	bool operator <= (const Age &a1) {
 		return (this->age <= a1.age);
 	}
+	int getPoints() {
+		return this->age;
+	}
 };
 
 class Citizen {
