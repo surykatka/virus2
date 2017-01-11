@@ -5,7 +5,16 @@
 #include <vector>
 #include <string>
 
-class Monster {
+class IMonster
+{
+public:
+  virtual HealthPoints getHealth() const = 0;
+  virtual AttackPower getAttackPower() const = 0;
+  virtual void takeDamage(AttackPower damage) = 0;
+  virtual std::string getName() = 0;
+};
+
+class Monster : public IMonster  {
 private:
     HealthPoints _health;
     AttackPower _attackPower;
@@ -24,9 +33,13 @@ public:
     void takeDamage(AttackPower damage) {
         this->_health.takePoints(damage);
     }
+
+    std::string getName() {
+      return "Monster";
+    }
 };
 
-class Zombie : public Monster {
+class Zombie : public Monster{
 public:
 	Zombie(int health, int age) : Monster(health, age) {
     }
@@ -56,7 +69,7 @@ public:
 	}
 };
 
-class GroupOfMonsters {
+class GroupOfMonsters : public IMonster {
 	private:
 		std::vector<Monster> monster_list;
 		HealthPoints _health;
@@ -97,7 +110,7 @@ class GroupOfMonsters {
 		}
     }
 
-     std::string getName() {
+  std::string getName() {
 		return "GroupOfMonsters";
 	}
 };

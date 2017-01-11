@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(teemager_does_not_allow_age_over_17)
 BOOST_AUTO_TEST_CASE(get_age_returns_age)
 {
   Adult a(HealthPoints(13), Age(19));
-  BOOST_CHECK_EQUAL(a.getAge().getPoints(), HealthPoints(10).getPoints());
+  BOOST_CHECK_EQUAL(a.getAge().getPoints(), Age(19).getPoints());
 }
 
 BOOST_AUTO_TEST_CASE(adult_take_damage_takes_hitpoints)
@@ -98,21 +98,27 @@ BOOST_AUTO_TEST_CASE(monster_name_is_correct_for_mummy)
 
 BOOST_AUTO_TEST_CASE(alive_citizens_is_0_when_no_added)
 {
-  auto smalltown = SmallTown::Builder().build();
+  auto mummy = createMummy(90, 1);
+  auto smalltown = SmallTown::Builder()
+    .monster(mummy).build();
   BOOST_CHECK_EQUAL(smalltown.getStatus().getAliveCitizens(), 0);
 }
 
 BOOST_AUTO_TEST_CASE(alive_citizens_returns_correct_value_for_1_citizen)
 {
+  auto mummy = createMummy(90, 1);
   auto cit = createAdult(20, 23);
-  auto smalltown = SmallTown::Builder().citizen(cit).build();
+  auto smalltown = SmallTown::Builder().citizen(cit).monster(mummy).build();
   BOOST_CHECK_EQUAL(smalltown.getStatus().getAliveCitizens(), 1);
 }
 
 BOOST_AUTO_TEST_CASE(smalltown_check_for_adding_same_citizens)
 {
   auto cit = createAdult(20, 23);
-  auto smalltown = SmallTown::Builder().citizen(cit).citizen(cit).build();
+  auto mummy = createMummy(90, 1);
+  auto smalltown = SmallTown::Builder()
+    .monster(mummy)
+    .citizen(cit).citizen(cit).build();
   BOOST_CHECK_EQUAL(smalltown.getStatus().getAliveCitizens(), 1);
 }
 

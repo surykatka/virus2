@@ -8,21 +8,26 @@
 #include <iostream>
 
 class Status {
-//TODO
+	std::string monsterName;
+	int monsterHealth;
+	int aliveCitizens = 0;
+
 	public:
+		Status(IMonster &monster, std::vector<Citizen> &citizens) {
+			monsterName = monster.getName();
+			monsterHealth = monster.getHealth().getPoints();
+		}
+
 		std::string getMonsterName() {
-			//TODO
-			return "";
+			return monsterName;
 		}
 
 		int getMonsterHealth() {
-			//TODO
-			return -1;
+			return monsterHealth;
 		}
-		
+
 		int getAliveCitizens() {
-			//TODO
-			return -1;
+			return aliveCitizens;
 		}
 
 };
@@ -30,7 +35,7 @@ class Status {
 class SmallTown {
 	private:
 		std::vector<Citizen> citizens;
-		std::vector<Monster> monsters;
+		IMonster& monster;
 		int t1;
 		int t2;
 	public:
@@ -39,32 +44,28 @@ class SmallTown {
 		}
 
 		Status getStatus() {
-			//TODO
-			return Status();
+			return Status(monster, citizens);
 		}
 
-		SmallTown(std::vector<Citizen> _citizens, std::vector<Monster> _monsters,
-			int _t1, int _t2) {
-		}
+		SmallTown(std::vector<Citizen> _citizens, IMonster& _monster,
+			int _t1, int _t2) : citizens(_citizens) , monster(_monster) {}
+
 	class Builder {
 		private:
 			std::vector<Citizen> citizens;
-			std::vector<Monster> monsters;
+			IMonster* monsters;
 			int t1;
 			int t2;
 		public:
-			Builder monster(Monster _monster) {
-				//TODO - dodaj monster do listy
-				return *this;
-			}
+			Builder(){}
 
-			Builder monster(GroupOfMonsters _monsters) {
-				//TODO - dodaj monsters do listy
+			Builder monster(IMonster& _monster) {
+				monsters = &_monster;
 				return *this;
 			}
 
 			Builder citizen(Citizen _citizen) {
-				//TODO - dodaj monster do listy
+				citizens.push_back(_citizen);
 				return *this;
 			}
 
@@ -79,7 +80,8 @@ class SmallTown {
 			}
 
 			SmallTown build() {
-				return SmallTown(citizens, monsters, t1, t2);
+				//TODO: throw gdy nie ma monstera
+				return SmallTown(citizens, *monsters, t1, t2);
 			}
 	};
 
