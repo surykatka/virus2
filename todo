@@ -15,6 +15,9 @@ Drukowanie wyniku na cout w metodzie tick
 -!
 Przetestowanie czy te modulo itd działa w tick tak jak trzeba.
 
+-!
+Nie działa test na sprawdzanie czy w builderze juz nie dodalismy tego citizena
+
 --
 Czy nie należałoby wyciągnąć klas Age, Health, GroupOfMonsters itd do różnych plików?
 
