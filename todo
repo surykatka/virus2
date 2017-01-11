@@ -1,0 +1,47 @@
+-!
+Sheriff nie atakuje monstera. Wydaje mi sie, że przyczyną problemu jest to
+że metoda Smalltown::builder.citizen(Citizen) nie przyjmuje referencji tylko value.
+Przez to (o ile to dobrze rozumiem) wywoływany jest copy ctor i nie wywołuje się
+metoda attackMonster z szeryfa tylko ze zwykłego citizena, który nic nie robi.
+Nie można zmienić tego od razu na referencję bo przy wywołaniu builder.citizen(createSheriff())
+dostajemy error że to rvalue ref.
+
+Nie wiem do końca jak to załatwić, opcją jest np zmienienie tych metod createSheriff i tak dalej
+tak aby zwracały coś innego. Np jakiś smart pointer? Nie testowałem tego ale jest to jakaś myśl.
+
+-!
+Drukowanie wyniku na cout w metodzie tick
+
+-!
+Przetestowanie czy te modulo itd działa w tick tak jak trzeba.
+
+--
+Czy nie należałoby wyciągnąć klas Age, Health, GroupOfMonsters itd do różnych plików?
+
+--
+HealthPoints::takePoints(int) jest jakos dziwne zaimplementowane :p
+Nie mozna po prostu healthPoints = max(healthPoints - loss.getPoints, 0)
+?
+
+--
+Czy nie należałoby rozdzielić headerów od implementacji? Tzn w .h same
+deklaracje a w .cc definicje.
+
+--
+Clang-format przed submitem bo styl jest słaby
+
+--
+Upewnic sie ze wszystkie headery sa potrzebne
+
+--
+Do czego jest operator<= w Age?
+
+--
+Czy nie trzeba użyć wirtualnych destruktorów?
+
+--
+Poczytac forum jeszcze jutro bo na bank pojawia sie pytania o jakies corner case'y
+
+--
+Jakieś własne exceptiony zamiast std::invalid_argument
+(np w Smalltown::Builder::build nie do konca pasuje ten typ exceptiona moim zdaniem)
