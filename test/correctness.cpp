@@ -37,6 +37,26 @@ BOOST_AUTO_TEST_CASE(test_z_tresci)
   BOOST_CHECK_EQUAL(status.getAliveCitizens() , 3);
 }
 
+BOOST_AUTO_TEST_CASE(group_of_monsters_get_health)
+{
+  auto groupOfMonsters = createGroupOfMonsters({
+      createMummy(90, 1),
+      createZombie(20, 1),
+      createVampire(30, 1)
+  });
+  BOOST_CHECK_EQUAL(groupOfMonsters.getHealth().getPoints(), 140);
+}
+
+BOOST_AUTO_TEST_CASE(group_of_monsters_get_attach)
+{
+  auto groupOfMonsters = createGroupOfMonsters({
+      createMummy(90, 1),
+      createZombie(20, 1),
+      createVampire(30, 1)
+  });
+  BOOST_CHECK_EQUAL(groupOfMonsters.getAttackPower().getPoints(), 3);
+}
+
 BOOST_AUTO_TEST_CASE(monster_attack_power_assigns_values)
 {
   Zombie z(3, 4);

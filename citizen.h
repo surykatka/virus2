@@ -40,6 +40,7 @@ public:
 		}
 		return this->healthPoints;
 	}
+
 	int getPoints() {
 		return this->healthPoints;
 	}
