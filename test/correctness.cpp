@@ -12,6 +12,31 @@
 
 using namespace std;
 
+BOOST_AUTO_TEST_CASE(test_z_tresci)
+{
+  auto groupOfMonsters = createGroupOfMonsters({
+      createMummy(90, 1),
+      createZombie(20, 1),
+      createVampire(30, 1)
+  });
+  auto smallTown = SmallTown::Builder()
+      .monster(groupOfMonsters)
+      .startTime(3)
+      .maxTime(27)
+      .citizen(createSheriff(100, 35, 20))
+      .citizen(createAdult(100, 21))
+      .citizen(createTeenager(50, 14))
+      .build();
+
+  smallTown.tick(18);
+  smallTown.tick(3);
+
+  auto status = smallTown.getStatus();
+  BOOST_CHECK_EQUAL(status.getMonsterName() ,"GroupOfMonsters");
+  BOOST_CHECK_EQUAL(status.getMonsterHealth() ,80);
+  BOOST_CHECK_EQUAL(status.getAliveCitizens() , 3);
+}
+
 BOOST_AUTO_TEST_CASE(monster_attack_power_assigns_values)
 {
   Zombie z(3, 4);

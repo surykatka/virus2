@@ -3,9 +3,10 @@
 
 #include <string>
 #include <tuple>
+#include <exception>
+#include <iostream>
 #include "citizen.h"
 #include "monster.h"
-#include <iostream>
 
 class Status {
 	std::string monsterName;
@@ -16,6 +17,10 @@ class Status {
 		Status(IMonster &monster, std::vector<Citizen> &citizens) {
 			monsterName = monster.getName();
 			monsterHealth = monster.getHealth().getPoints();
+			for(auto citizen : citizens) {
+				if(citizen.isAlive())
+					aliveCitizens++;
+			}
 		}
 
 		std::string getMonsterName() {
@@ -80,7 +85,9 @@ class SmallTown {
 			}
 
 			SmallTown build() {
-				//TODO: throw gdy nie ma monstera
+				if(monsters == NULL)
+					throw std::invalid_argument
+					  ( "monster must be set before building smalltown" );
 				return SmallTown(citizens, *monsters, t1, t2);
 			}
 	};

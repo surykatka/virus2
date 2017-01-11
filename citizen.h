@@ -2,6 +2,7 @@
 #define CITIZEN_H
 
 #include <cassert>
+#include <stdexcept>
 
 class AttackPower {
 	private:
@@ -11,6 +12,9 @@ class AttackPower {
 			this->attackPower = 0;
 		}
 		AttackPower(int _attackPower) {
+			if(_attackPower < 0) {
+				throw std::invalid_argument( "attack power cannot be negative" );
+			}
 			this->attackPower = _attackPower;
 		}
 
@@ -28,7 +32,7 @@ public:
 	HealthPoints(int healthPoints) {
 		this->healthPoints = healthPoints;
 	}
-	// nie będę się upierać przy poniższej implementacji :p
+
 	int takePoints(AttackPower loss) {
 		if (this->healthPoints > 0) {
 			this->healthPoints = this->healthPoints - loss.getPoints() < 1
@@ -63,9 +67,11 @@ class Citizen {
 private:
 	Age age;
 	HealthPoints health;
+
+protected:
+
 public:
-	Citizen(HealthPoints _health, Age _age) {
-        //TODO tu asercja o wiek?
+		Citizen(HealthPoints _health, Age _age) {
         this->age = _age;
         this->health = _health;
     }
@@ -78,20 +84,36 @@ public:
     }
 
     void takeDamage(AttackPower damage) {
-		this->health.takePoints(damage);
-	}
+			this->health.takePoints(damage);
+		}
+
+		bool isAlive() {
+			return age.getPoints() > 0;
+		}
 };
 
 class Adult : public Citizen {
+	bool isAgeValid(Age _age) {
+		auto points = _age.getPoints();
+		return ( 18 <= points && points <= 100 );
+	}
 public:
 	Adult(HealthPoints health, Age age) : Citizen(health, age) {
-    }
+		if( !isAgeValid(age)) {
+			throw std::invalid_argument( "invalid age" );}
+	}
 };
 
 class Teenager : public Citizen {
+	bool isAgeValid(Age _age) {
+		auto points = _age.getPoints();
+		return ( 11 <= points && points <= 17 );
+	}
 public:
 	Teenager(HealthPoints health, Age age) : Citizen(health, age) {
-    }
+		if( !isAgeValid(age)) {
+	 		throw std::invalid_argument( "invalid age" );}
+		}
 };
 
 class Sheriff : public Citizen {
