@@ -47,6 +47,17 @@ BOOST_AUTO_TEST_CASE(group_of_monsters_get_health)
   BOOST_CHECK_EQUAL(groupOfMonsters.getHealth().getPoints(), 140);
 }
 
+BOOST_AUTO_TEST_CASE(takes_damage_works_on_group_of_monsters)
+{
+  auto groupOfMonsters = createGroupOfMonsters({
+      createMummy(90, 1),
+      createZombie(20, 1),
+      createVampire(30, 1)
+  });
+  groupOfMonsters.takeDamage(AttackPower(50));
+  BOOST_CHECK_EQUAL(groupOfMonsters.getHealth().getPoints(), 40);
+}
+
 BOOST_AUTO_TEST_CASE(group_of_monsters_get_attach)
 {
   auto groupOfMonsters = createGroupOfMonsters({
